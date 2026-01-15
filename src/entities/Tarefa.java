@@ -1,5 +1,7 @@
 package entities;
 
+import enums.StatusTarefa;
+
 import java.time.LocalDate;
 
 public class Tarefa {
@@ -7,13 +9,13 @@ public class Tarefa {
     private String titulo;
     private String descricao;
     private LocalDate deadline;
-    private Status status;
+    private StatusTarefa status;
 
     public Tarefa(String titulo, String descricao, LocalDate deadline) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.deadline = deadline;
-        this.status = Status.PENDENTE;
+        this.status = StatusTarefa.PENDENTE;
     }
 
     public String getTitulo() {
@@ -40,12 +42,12 @@ public class Tarefa {
         this.deadline = deadline;
     }
 
-    public Status getStatus() {
+    public StatusTarefa getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusTarefa statusTarefa) {
+        this.status = statusTarefa;
     }
 
     @Override

@@ -1,6 +1,6 @@
-package entities;
+package enums;
 
-public enum Status {
+public enum StatusTarefa {
 
     PENDENTE,
     EM_ANDAMENTO,
