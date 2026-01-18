@@ -50,13 +50,11 @@ public class Tarefa {
         this.status = statusTarefa;
     }
 
-    @Override
-    public String toString() {
-        return "entities.Tarefa{" +
-                "titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", deadline=" + deadline +
-                ", status=" + status +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "TÍTULO: "+ titulo
+//                + ", DESCRIÇÃO: " + descricao
+//                + ", DEADLINE: " + deadline
+//                + ", STATUS: " + status;
+//    }
 }

@@ -19,10 +19,8 @@ public class ListaDeTarefas {
         this.listaDeTarefas.add(tarefa);
     }
 
-    @Override
-    public String toString() {
-        return "GerenciadorDeTarefas{" +
-                "listaDeTarefas=" + listaDeTarefas +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return listaDeTarefas.toString();
+//    }
 }

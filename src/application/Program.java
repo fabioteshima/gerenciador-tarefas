@@ -28,15 +28,15 @@ public class Program {
         tarefaTeste2.setStatus(StatusTarefa.EM_ANDAMENTO);
         listaDeTarefas.adicionarTarefa(tarefaTeste2);
 
-        Tarefa tarefaTeste3 = new Tarefa("Tarefa Teste 3", "Fazer tarefa Teste 3", LocalDate.now().plusDays(4));
-        tarefaTeste3.setStatus(StatusTarefa.CONCLUIDO);
-        listaDeTarefas.adicionarTarefa(tarefaTeste3);
+//        Tarefa tarefaTeste3 = new Tarefa("Tarefa Teste 3", "Fazer tarefa Teste 3", LocalDate.now().plusDays(4));
+//        tarefaTeste3.setStatus(StatusTarefa.CONCLUIDO);
+//        listaDeTarefas.adicionarTarefa(tarefaTeste3);
 
         System.out.println("***---------- GERENCIADOR DE TAREFAS ----------***\n");
 
         boolean continuar = true;
         do {
-            int opcao = 0;
+            int opcaoUsuario = 0;
             boolean validado = false;
             // validação da opção
             do {
@@ -44,9 +44,9 @@ public class Program {
                 System.out.println("1 - CADASTRAR \n2 - LISTAR \n3 - FILTRAR \n4 - SAIR");
                 System.out.print("Opção: ");
                 if(scanner.hasNextInt()) {
-                    opcao = scanner.nextInt();
+                    opcaoUsuario = scanner.nextInt();
                     scanner.nextLine();
-                    if(opcao >= 1 && opcao <= 4){
+                    if(opcaoUsuario >= 1 && opcaoUsuario <= 4){
                         validado = true;
                     }
                     else {
@@ -60,7 +60,7 @@ public class Program {
             } while (!validado);
 
             System.out.println();
-            switch (opcao) {
+            switch (opcaoUsuario) {
                 case 1:
                     System.out.println("CADASTRAR TAREFA");
                     listaDeTarefas.adicionarTarefa(ServicoDeTarefas.Cadastrar(scanner));
@@ -72,8 +72,8 @@ public class Program {
                     System.out.println();
                     break;
                 case 3:
-                    System.out.println("FILTRAR TAREFA(S)");
-                    ServicoDeTarefas.Filtrar(listaDeTarefas);
+                    System.out.println("FILTRAR TAREFA(S) POR");
+                    ServicoDeTarefas.Filtrar(listaDeTarefas, scanner);
                     System.out.println();
                     break;
                 case 4:
@@ -82,11 +82,6 @@ public class Program {
                     break;
             }
         } while (continuar);
-
-        // imprime todas as tarefas cadastradas antes de encerrar
-        for (Tarefa t : listaDeTarefas.getListaDeTarefas()) {
-            System.out.println(t.toString());
-        }
 
         scanner.close();
     }

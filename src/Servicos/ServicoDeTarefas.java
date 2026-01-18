@@ -6,7 +6,6 @@ import enums.StatusTarefa;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Scanner;
 
 public class ServicoDeTarefas {
@@ -25,13 +24,56 @@ public class ServicoDeTarefas {
     }
 
     public static void Listar(ListaDeTarefas listaDeTarefas){
-         listaDeTarefas.getListaDeTarefas().forEach(System.out::println);
+        listaDeTarefas.getListaDeTarefas()
+                .forEach(t -> {
+                    System.out.print("Título: " + t.getTitulo());
+                    System.out.print(", Descrição: " + t.getDescricao());
+                    System.out.print(", Data limite: " + t.getDeadline().format(dtf));
+                    System.out.println(", Status: " + t.getStatus());
+                });
     }
 
-    public static void Filtrar( ListaDeTarefas listaDeTarefas){
-        listaDeTarefas.getListaDeTarefas().stream()
-                .filter(status -> status.getStatus().equals(StatusTarefa.EM_ANDAMENTO))
-                .forEach(System.out::println);
+    public static void Filtrar( ListaDeTarefas listaDeTarefas, Scanner scanner) {
+        int opcao = 0;
+        boolean validado = false;
+        // validação da opção
+        do {
+            System.out.println("1 - PENDENTE \n2 - EM_ANDAMENTO \n3 - CONCLUÍDO \n4 - VOLTAR");
+            System.out.print("Opção: ");
+            if(scanner.hasNextInt()) {
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+                if(opcao >= 1 && opcao <= 4){
+                    validado = true;
+                }
+                else {
+                    System.out.println("Entrada inválida! Opções entre 1 e 4.\n");
+                }
+            }
+            else {
+                System.out.println("Entrada inválida. Digite apenas números.\n");
+                scanner.nextLine(); // descarta entrada inválida
+            }
+        } while (!validado);
+        System.out.println();
+
+        StatusTarefa status = StatusTarefa.ConverteOpcaoParaStatus(opcao);
+
+        System.out.println("RESULTADO:");
+        boolean resultado = listaDeTarefas.getListaDeTarefas().stream()
+                .anyMatch(tarefa -> tarefa.getStatus().equals(status));
+        if (!resultado) {
+            System.out.println("Nenhuma ocorrência encontrada.");
+        } else {
+            listaDeTarefas.getListaDeTarefas().stream()
+                    .filter(tarefa -> tarefa.getStatus().equals(status))
+                    .forEach(tarefa -> {
+                        System.out.print("Título: " + tarefa.getTitulo());
+                        System.out.print(", Descrição: " + tarefa.getDescricao());
+                        System.out.print(", Data limite: " + tarefa.getDeadline().format(dtf));
+                        System.out.println(", Status: " + tarefa.getStatus());
+                    });
+        }
     }
 
 }
