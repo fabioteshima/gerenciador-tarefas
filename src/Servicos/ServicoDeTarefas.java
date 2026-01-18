@@ -2,6 +2,7 @@ package Servicos;
 
 import entities.ListaDeTarefas;
 import entities.Tarefa;
+import enums.StatusTarefa;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +26,12 @@ public class ServicoDeTarefas {
 
     public static void Listar(ListaDeTarefas listaDeTarefas){
          listaDeTarefas.getListaDeTarefas().forEach(System.out::println);
+    }
+
+    public static void Filtrar( ListaDeTarefas listaDeTarefas){
+        listaDeTarefas.getListaDeTarefas().stream()
+                .filter(status -> status.getStatus().equals(StatusTarefa.EM_ANDAMENTO))
+                .forEach(System.out::println);
     }
 
 }
