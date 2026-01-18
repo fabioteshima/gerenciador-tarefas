@@ -45,14 +45,14 @@ public class Program {
                     System.out.println();
                     break;
                 case 2:
-                    System.out.println("LISTAR TAREFA(S)");
-                    for (Tarefa t : listaDeTarefas.getListaDeTarefas()) {
-                        System.out.println(t);
-                    }
+                    System.out.println("LISTA DE TAREFA(S)");
+                    ServicoDeTarefas.Listar(listaDeTarefas);
+                    System.out.println();
                     break;
                 case 3:
                     System.out.println("FILTRAR TAREFA(S)");
                     // implementar filtro
+                    System.out.println();
                     break;
                 case 4:
                     System.out.println("PROGRAMA ENCERRADO");
