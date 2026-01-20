@@ -8,13 +8,13 @@ public class Tarefa {
 
     private String titulo;
     private String descricao;
-    private LocalDate deadline;
+    private LocalDate dataLimite;
     private StatusTarefa status;
 
-    public Tarefa(String titulo, String descricao, LocalDate deadline) {
+    public Tarefa(String titulo, String descricao, LocalDate dataLimite) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.deadline = deadline;
+        this.dataLimite = dataLimite;
         this.status = StatusTarefa.PENDENTE;
     }
 
@@ -34,12 +34,12 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public LocalDate getDeadline() {
-        return deadline;
+    public LocalDate getDataLimite() {
+        return dataLimite;
     }
 
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
+    public void setDataLimite(LocalDate dataLimite) {
+        this.dataLimite = dataLimite;
     }
 
     public StatusTarefa getStatus() {

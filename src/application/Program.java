@@ -24,7 +24,7 @@ public class Program {
         tarefaTeste1.setStatus(StatusTarefa.PENDENTE);
         listaDeTarefas.adicionarTarefa(tarefaTeste1);
 
-        Tarefa tarefaTeste2 = new Tarefa("Tarefa Teste 2", "Fazer tarefa Teste 2", LocalDate.now().plusDays(3));
+        Tarefa tarefaTeste2 = new Tarefa("Tarefa Teste 2", "Fazer tarefa Teste 2", LocalDate.now().minusDays(1));
         tarefaTeste2.setStatus(StatusTarefa.EM_ANDAMENTO);
         listaDeTarefas.adicionarTarefa(tarefaTeste2);
 
@@ -38,7 +38,6 @@ public class Program {
         do {
             int opcaoUsuario = 0;
             boolean validado = false;
-            // validação da opção
             do {
                 System.out.println("Digite a opção desejada");
                 System.out.println("1 - CADASTRAR \n2 - LISTAR \n3 - FILTRAR \n4 - SAIR");
