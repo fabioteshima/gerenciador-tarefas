@@ -7,8 +7,11 @@ import enums.StatusTarefa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ServicoDeTarefas {
 
@@ -63,15 +66,22 @@ public class ServicoDeTarefas {
     }
 
     public static void Listar(ListaDeTarefas listaDeTarefas) {
-        listaDeTarefas.getListaDeTarefas().stream()
+        List<Tarefa> listaTarefas = new ArrayList<>();
+        listaTarefas = listaDeTarefas.getListaDeTarefas().stream()
                 .sorted(Comparator.comparing(Tarefa::getDataLimite))
-                .forEach(tarefa -> {
-                    System.out.print("Id: " + tarefa.getId());
-                    System.out.print(", Data limite: " + tarefa.getDataLimite().format(dtf));
-                    System.out.print(", Título: " + tarefa.getTitulo());
-                    System.out.print(", Descrição: " + tarefa.getDescricao());
-                    System.out.println(", Status: " + tarefa.getStatus());
-                });
+                .collect(Collectors.toList());
+        if(listaTarefas.isEmpty()){
+            System.out.println("Nenhuma ocorrência encontrada");
+        }
+        else{
+            listaTarefas.forEach(tarefa -> {
+                System.out.print("Id: " + tarefa.getId());
+                System.out.print(", Data limite: " + tarefa.getDataLimite().format(dtf));
+                System.out.print(", Título: " + tarefa.getTitulo());
+                System.out.print(", Descrição: " + tarefa.getDescricao());
+                System.out.println(", Status: " + tarefa.getStatus());
+            });
+        }
     }
 
     public static void Filtrar(ListaDeTarefas listaDeTarefas, Scanner scanner) {
@@ -98,7 +108,7 @@ public class ServicoDeTarefas {
 
         if (opcao != 4) {
             System.out.println();
-            System.out.println("RESULTADO:");
+            System.out.println("*** RESULTADO ***");
             boolean resultado = listaDeTarefas.getListaDeTarefas().stream()
                     .anyMatch(tarefa -> tarefa.getStatus().equals(status));
             if (!resultado) {
@@ -120,11 +130,8 @@ public class ServicoDeTarefas {
 
     public static void Alterar(ListaDeTarefas listaDeTarefas, Scanner scanner) {
         Listar(listaDeTarefas);
-
         int opcaoId;
         Tarefa tarefaId = null;
-
-        // Solicita o Id da tarefa
         while (true) {
             System.out.print("Qual tarefa deseja alterar o status? Digite o Id: ");
             if (scanner.hasNextInt()) {
@@ -161,5 +168,27 @@ public class ServicoDeTarefas {
         } else {
             System.out.println("Opção inválida. Nenhuma alteração realizada.");
         }
+    }
+
+    public static void AvisoDataLimite(ListaDeTarefas listaDeTarefas) {
+        System.out.println("*** Atenção! Tarefas a vencer em até 2 dias ***");
+        List<Tarefa> tarefasAVencer = new ArrayList<>();
+        tarefasAVencer = listaDeTarefas.getListaDeTarefas().stream()
+                .filter(tarefa -> !tarefa.getDataLimite().isAfter(LocalDate.now().plusDays(2)))
+                .collect(Collectors.toList());
+        if (tarefasAVencer.isEmpty()) {
+            System.out.println("Nenhuma tarefa próxima do prazo.");
+        } else {
+            tarefasAVencer.stream()
+                    .sorted(Comparator.comparing(Tarefa::getDataLimite))
+                    .forEach(tarefa -> {
+                        System.out.print("Data limite: " + tarefa.getDataLimite().format(dtf));
+                        System.out.print(", Id: " + tarefa.getId());
+                        System.out.print(", Título: " + tarefa.getTitulo());
+                        System.out.print(", Descrição: " + tarefa.getDescricao());
+                        System.out.println(", Status: " + tarefa.getStatus());
+                    });
+        }
+        System.out.println();
     }
 }
