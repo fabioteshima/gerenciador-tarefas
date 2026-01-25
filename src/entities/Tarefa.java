@@ -6,16 +6,24 @@ import java.time.LocalDate;
 
 public class Tarefa {
 
+    private static int numeradorId;
+
+    private int id;
     private String titulo;
     private String descricao;
     private LocalDate dataLimite;
     private StatusTarefa status;
 
     public Tarefa(String titulo, String descricao, LocalDate dataLimite) {
+        this.id = ++numeradorId;
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataLimite = dataLimite;
         this.status = StatusTarefa.PENDENTE;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getTitulo() {
@@ -50,11 +58,12 @@ public class Tarefa {
         this.status = statusTarefa;
     }
 
-//    @Override
-//    public String toString() {
-//        return "TÍTULO: "+ titulo
-//                + ", DESCRIÇÃO: " + descricao
-//                + ", DEADLINE: " + deadline
-//                + ", STATUS: " + status;
-//    }
+    @Override
+    public String toString() {
+        return "ID: " + id
+                + ", TÍTULO: "+ titulo
+                + ", DESCRIÇÃO: " + descricao
+                + ", DEADLINE: " + dataLimite
+                + ", STATUS: " + status;
+    }
 }

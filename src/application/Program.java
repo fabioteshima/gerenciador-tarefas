@@ -28,9 +28,9 @@ public class Program {
         tarefaTeste2.setStatus(StatusTarefa.EM_ANDAMENTO);
         listaDeTarefas.adicionarTarefa(tarefaTeste2);
 
-//        Tarefa tarefaTeste3 = new Tarefa("Tarefa Teste 3", "Fazer tarefa Teste 3", LocalDate.now().plusDays(4));
-//        tarefaTeste3.setStatus(StatusTarefa.CONCLUIDO);
-//        listaDeTarefas.adicionarTarefa(tarefaTeste3);
+        Tarefa tarefaTeste3 = new Tarefa("Tarefa Teste 3", "Fazer tarefa Teste 3", LocalDate.now().plusDays(4));
+        tarefaTeste3.setStatus(StatusTarefa.CONCLUIDO);
+        listaDeTarefas.adicionarTarefa(tarefaTeste3);
 
         System.out.println("***---------- GERENCIADOR DE TAREFAS ----------***\n");
 
@@ -40,19 +40,17 @@ public class Program {
             boolean validado = false;
             do {
                 System.out.println("Digite a opção desejada");
-                System.out.println("1 - CADASTRAR \n2 - LISTAR \n3 - FILTRAR \n4 - SAIR");
+                System.out.println("1 - CADASTRAR\n2 - LISTAR\n3 - FILTRAR\n4 - ALTERAR STATUS\n5 - SAIR");
                 System.out.print("Opção: ");
-                if(scanner.hasNextInt()) {
+                if (scanner.hasNextInt()) {
                     opcaoUsuario = scanner.nextInt();
                     scanner.nextLine();
-                    if(opcaoUsuario >= 1 && opcaoUsuario <= 4){
+                    if (opcaoUsuario >= 1 && opcaoUsuario <= 5) {
                         validado = true;
+                    } else {
+                        System.out.println("Entrada inválida! Opções entre 1 e 5.\n");
                     }
-                    else {
-                        System.out.println("Entrada inválida! Opções entre 1 e 4.\n");
-                    }
-                }
-                else {
+                } else {
                     System.out.println("Entrada inválida. Digite apenas números.\n");
                     scanner.nextLine(); // descarta entrada inválida
                 }
@@ -76,6 +74,11 @@ public class Program {
                     System.out.println();
                     break;
                 case 4:
+                    System.out.println("ALTERAR STATUS");
+                    ServicoDeTarefas.Alterar(listaDeTarefas, scanner);
+                    System.out.println();
+                    break;
+                case 5:
                     System.out.println("PROGRAMA ENCERRADO");
                     continuar = false; // força saída do loop
                     break;
