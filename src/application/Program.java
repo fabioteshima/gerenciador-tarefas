@@ -1,9 +1,8 @@
 package application;
 
-import Servicos.ServicoDeTarefas;
-import entities.ListaDeTarefas;
 import entities.Tarefa;
-import enums.StatusTarefa;
+import services.ServicoDeTarefas;
+import entities.ListaDeTarefas;
 
 import java.time.LocalDate;
 import java.util.Scanner;

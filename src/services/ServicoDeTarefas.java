@@ -1,4 +1,4 @@
-package Servicos;
+package services;
 
 import entities.ListaDeTarefas;
 import entities.Tarefa;
