@@ -130,48 +130,50 @@ public class ServicoDeTarefas {
 
     public static void Alterar(ListaDeTarefas listaDeTarefas, Scanner scanner) {
         Listar(listaDeTarefas);
-        int opcaoId;
-        Tarefa tarefaId = null;
-        while (true) {
-            System.out.print("Qual tarefa deseja alterar o status? Digite o Id: ");
-            if (scanner.hasNextInt()) {
-                opcaoId = scanner.nextInt();
-                scanner.nextLine();
+        if(!listaDeTarefas.getListaDeTarefas().isEmpty()){
+            int opcaoId;
+            Tarefa tarefaId = null;
+            while (true) {
+                System.out.print("Qual tarefa deseja alterar o status? Digite o Id: ");
+                if (scanner.hasNextInt()) {
+                    opcaoId = scanner.nextInt();
+                    scanner.nextLine();
 
-                int finalOpcaoId = opcaoId;
-                tarefaId = listaDeTarefas.getListaDeTarefas()
-                        .stream()
-                        .filter(t -> t.getId() == finalOpcaoId)
-                        .findFirst()
-                        .orElse(null);
+                    int finalOpcaoId = opcaoId;
+                    tarefaId = listaDeTarefas.getListaDeTarefas()
+                            .stream()
+                            .filter(t -> t.getId() == finalOpcaoId)
+                            .findFirst()
+                            .orElse(null);
 
-                if (tarefaId == null) {
-                    System.out.println("Entrada inválida! Digite um Id existente.\n");
+                    if (tarefaId == null) {
+                        System.out.println("Entrada inválida! Digite um Id existente.\n");
+                    } else {
+                        break;
+                    }
                 } else {
-                    break;
+                    System.out.println("Entrada inválida! Digite apenas números.\n");
+                    scanner.nextLine();
                 }
-            } else {
-                System.out.println("Entrada inválida! Digite apenas números.\n");
-                scanner.nextLine();
             }
-        }
 
-        System.out.println();
-        System.out.print("Deseja alterar para\n1 - PENDENTE\n2 - EM ANDAMENTO\n3 - CONCLUÍDO\nDigite opção: ");
-        int opcaoStatus = scanner.nextInt();
-        scanner.nextLine();
+            System.out.println();
+            System.out.print("Deseja alterar para\n1 - PENDENTE\n2 - EM ANDAMENTO\n3 - CONCLUÍDO\nDigite opção: ");
+            int opcaoStatus = scanner.nextInt();
+            scanner.nextLine();
 
-        StatusTarefa novoStatus = StatusTarefa.ConverteOpcaoParaStatus(opcaoStatus);
-        if (novoStatus != null) {
-            tarefaId.setStatus(novoStatus);
-            System.out.println("Status da tarefa alterado com sucesso!");
-        } else {
-            System.out.println("Opção inválida. Nenhuma alteração realizada.");
+            StatusTarefa novoStatus = StatusTarefa.ConverteOpcaoParaStatus(opcaoStatus);
+            if (novoStatus != null) {
+                tarefaId.setStatus(novoStatus);
+                System.out.println("Status da tarefa alterado com sucesso!");
+            } else {
+                System.out.println("Opção inválida. Nenhuma alteração realizada.");
+            }
         }
     }
 
     public static void AvisoDataLimite(ListaDeTarefas listaDeTarefas) {
-        System.out.println("*** Atenção! Tarefas a vencer em até 2 dias ***");
+        System.out.println("*** Atenção! Tarefas a vencer em até D+2 dias ***");
         List<Tarefa> tarefasAVencer = new ArrayList<>();
         tarefasAVencer = listaDeTarefas.getListaDeTarefas().stream()
                 .filter(tarefa -> !tarefa.getDataLimite().isAfter(LocalDate.now().plusDays(2)))

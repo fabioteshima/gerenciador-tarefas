@@ -19,8 +19,8 @@ public class ListaDeTarefas {
         this.listaDeTarefas.add(tarefa);
     }
 
-//    @Override
-//    public String toString() {
-//        return listaDeTarefas.toString();
-//    }
+    @Override
+    public String toString() {
+        return listaDeTarefas.toString();
+    }
 }

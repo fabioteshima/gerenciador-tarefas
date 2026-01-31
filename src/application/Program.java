@@ -16,21 +16,18 @@ public class Program {
 
         ListaDeTarefas listaDeTarefas = new ListaDeTarefas();
 
+//        ******* Para teste de notificações inteligentes tirar o bloco abaixo do comentário ********* //
+
 //        Tarefa tarefaTeste0 = new Tarefa("Tarefa Teste 0", "Fazer tarefa Teste 0", LocalDate.now().plusDays(1));
-//        tarefaTeste0.setStatus(StatusTarefa.EM_ANDAMENTO);
 //        listaDeTarefas.adicionarTarefa(tarefaTeste0);
-//
 //        Tarefa tarefaTeste1 = new Tarefa("Tarefa Teste 1", "Fazer tarefa Teste 1", LocalDate.now().plusDays(2));
-//        tarefaTeste1.setStatus(StatusTarefa.PENDENTE);
 //        listaDeTarefas.adicionarTarefa(tarefaTeste1);
-//
 //        Tarefa tarefaTeste2 = new Tarefa("Tarefa Teste 2", "Fazer tarefa Teste 2", LocalDate.now());
-//        tarefaTeste2.setStatus(StatusTarefa.EM_ANDAMENTO);
 //        listaDeTarefas.adicionarTarefa(tarefaTeste2);
-//
 //        Tarefa tarefaTeste3 = new Tarefa("Tarefa Teste 3", "Fazer tarefa Teste 3", LocalDate.now().plusDays(3));
-//        tarefaTeste3.setStatus(StatusTarefa.CONCLUIDO);
 //        listaDeTarefas.adicionarTarefa(tarefaTeste3);
+
+//          ******************************************************************************* //
 
         System.out.println("------------- ********************** -------------");
         System.out.println("************* GERENCIADOR DE TAREFAS *************");
@@ -50,7 +47,7 @@ public class Program {
                         + "2 - LISTAR\n"
                         + "3 - FILTRAR\n"
                         + "4 - ALTERAR STATUS\n"
-                        + "5 - CONSULTAR A VENCER (2 dias)\n"
+                        + "5 - CONSULTAR A VENCER (D+2 dias)\n"
                         + "6 - SAIR");
                 System.out.print("Opção: ");
                 if (scanner.hasNextInt()) {
